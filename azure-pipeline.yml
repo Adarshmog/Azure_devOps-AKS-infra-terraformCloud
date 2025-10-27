@@ -28,7 +28,7 @@ stages:
           - task: AzureCLI@2
             displayName: 'Terraform Init (Terraform Cloud)'
             inputs:
-              azureSubscription: 'Azure-ARM'        # <-- use actual connection name
+              azureSubscription: 'AzureARM'        # <-- use actual connection name
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               workingDirectory: '$(TF_WORKING_DIR)'
@@ -43,12 +43,12 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(TF_WORKING_DIR)'
-              environmentServiceNameAzureRM: 'Azure-ARM'   # <-- use actual connection name
+              environmentServiceNameAzureRM: 'AzureARM'   # <-- use actual connection name
 
           - task: TerraformTaskV4@4
             inputs:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: '$(TF_WORKING_DIR)'
-              environmentServiceNameAzureRM: 'Azure-ARM'   # <-- use actual connection name
+              environmentServiceNameAzureRM: 'AzureARM'   # <-- use actual connection name
 
