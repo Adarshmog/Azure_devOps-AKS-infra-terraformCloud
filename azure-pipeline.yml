@@ -13,7 +13,7 @@ variables:
 - name: TF_CLOUD_ORG
   value: 'azure-devops-infra'
 - name: TF_CLOUD_WORKSPACE
-  value: 'devops-infra'
+  value: 'Azure_devOps-AKS-infra-terraformCloud'
     
 
 stages:
