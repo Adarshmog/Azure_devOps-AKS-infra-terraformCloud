@@ -36,7 +36,7 @@ stages:
                 echo "Initializing Terraform Cloud backend..."
                 terraform init -input=false
             env:
-              TF_TOKEN_app_terraform_io: $(terraformToken)
+              TF_TOKEN_app_terraform_io: $(TF_TOKEN_app_terraform_io)
 
           - task: TerraformTaskV4@4
             inputs:
