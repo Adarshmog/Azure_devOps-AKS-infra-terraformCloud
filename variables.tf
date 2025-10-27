@@ -1,5 +1,5 @@
 variable "prefix" {
-  description = "Prefix used for resource naming."
+  description = "Prefix used for resource naming..."
   type        = string
 }
 
