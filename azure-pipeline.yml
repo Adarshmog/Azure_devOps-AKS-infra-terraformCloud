@@ -28,7 +28,7 @@ stages:
           - task: AzureCLI@2
             displayName: 'Terraform Init (Terraform Cloud)'
             inputs:
-              azureSubscription: 'AzureARM'        # <-- use actual connection name
+              azureSubscription: 'AzureARM'        
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               workingDirectory: '$(TF_WORKING_DIR)'
