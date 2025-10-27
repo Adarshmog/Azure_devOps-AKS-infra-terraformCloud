@@ -10,8 +10,6 @@ variables:
 - group: tfcloud     # Terraform token stored here
 - name: TF_WORKING_DIR
   value: '.'
-- name: AZURE_ARM
-  value: 'Azure-ARM'
 - name: TF_CLOUD_ORG
   value: 'azure-devops-infra'
 - name: TF_CLOUD_WORKSPACE
@@ -26,10 +24,11 @@ stages:
         displayName: "Terraform Apply"
         steps:
           - checkout: self
+          
           - task: AzureCLI@2
             displayName: 'Terraform Init (Terraform Cloud)'
             inputs:
-              azureSubscription: '$(AZURE_ARM)'
+              azureSubscription: 'Azure-ARM'        # <-- use actual connection name
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               workingDirectory: '$(TF_WORKING_DIR)'
@@ -39,16 +38,17 @@ stages:
             env:
               TF_TOKEN_app_terraform_io: $(terraformToken)
 
-          - task: TerraformTask@5
+          - task: TerraformTaskV4@4
             inputs:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(TF_WORKING_DIR)'
-              environmentServiceNameAzureRM: '$(AZURE_ARM)'
+              environmentServiceNameAzureRM: 'Azure-ARM'   # <-- use actual connection name
 
-          - task: TerraformTask@5
+          - task: TerraformTaskV4@4
             inputs:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: '$(TF_WORKING_DIR)'
-              environmentServiceNameAzureRM: '$(AZURE_ARM)'
+              environmentServiceNameAzureRM: 'Azure-ARM'   # <-- use actual connection name
+
