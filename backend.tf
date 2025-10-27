@@ -2,7 +2,7 @@ terraform {
   cloud{
     organization = "azure-devops-infra"         
     workspaces {
-      name = "devops-infra"              
+      name = "Azure_devOps-AKS-infra-terraformCloud"              
     }
   }
 }
