@@ -7,7 +7,7 @@ pool:
   name: 'adarsh' 
 
 variables:
-- group: tfcloud     # Terraform token stored here
+- group: tfcloud    
 - name: TF_WORKING_DIR
   value: '.'
 - name: TF_CLOUD_ORG
