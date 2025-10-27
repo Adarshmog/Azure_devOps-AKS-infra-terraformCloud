@@ -3,6 +3,11 @@ variable "prefix" {
   type        = string
 }
 
+variable "resource_group_name" {
+  type        = string
+  description = "Name of the Azure Resource Group."
+}
+
 variable "location" {
   description = "Azure region where resources will be deployed."
   type        = string
