@@ -1,0 +1,51 @@
+trigger: none
+
+pool:
+  name: 'adarsh' 
+
+variables:
+- group: tfcloud     # Terraform token stored here
+- name: TF_WORKING_DIR
+  value: '.'
+- name: AZURE_ARM
+  value: 'Azure-ARM'
+- name: TF_CLOUD_ORG
+  value: 'azure-devops-infra'
+- name: TF_CLOUD_WORKSPACE
+  value: 'devops-infra'
+    
+
+stages:
+  - stage: infra
+    displayName: "Provision All Resources"
+    jobs:
+      - job: terraformJob
+        displayName: "Terraform Apply"
+        steps:
+          - checkout: self
+          - task: AzureCLI@2
+            displayName: 'Terraform Init (Terraform Cloud)'
+            inputs:
+              azureSubscription: '$(AZURE_ARM)'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              workingDirectory: '$(TF_WORKING_DIR)'
+              inlineScript: |
+                echo "Initializing Terraform Cloud backend..."
+                terraform init -input=false
+            env:
+              TF_TOKEN_app_terraform_io: $(terraformToken)
+
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: '$(TF_WORKING_DIR)'
+              environmentServiceNameAzureRM: '$(AZURE_ARM)'
+
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              workingDirectory: '$(TF_WORKING_DIR)'
+              environmentServiceNameAzureRM: '$(AZURE_ARM)'
