@@ -33,7 +33,7 @@ stages:
               targetType: 'inline'
               workingDirectory: '$(TF_WORKING_DIR)'
               script: |
-                echo "Initializing Terraform with remote backend..."
+                echo "Initializing Terraform with remote backend......"
                 terraform init -input=false
             env:
               TF_TOKEN_app_terraform_io: $(TF_TOKEN_app_terraform_io)
