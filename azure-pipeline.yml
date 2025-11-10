@@ -45,7 +45,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(TF_WORKING_DIR)'
-              environmentServiceNameAzureRM: 'AzureARM'
+              environmentServiceNameAzureRM: 'azureNEW'
             env:
               TF_TOKEN_app_terraform_io: $(TF_TOKEN_app_terraform_io)
 
@@ -56,7 +56,7 @@ stages:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: '$(TF_WORKING_DIR)'
-              environmentServiceNameAzureRM: 'AzureARM'
+              environmentServiceNameAzureRM: 'azureNEW'
               commandOptions: '-auto-approve'
             env:
               TF_TOKEN_app_terraform_io: $(TF_TOKEN_app_terraform_io)
